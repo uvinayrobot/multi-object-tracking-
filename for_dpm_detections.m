@@ -32,7 +32,7 @@ for i=1:(length(A{1,1})/18)
 end 
 
 % load 0000_dpm_detections.mat
-numofimages=1059;
+numofimages=1059;   % number of iamges in selected folder
 for i=1:numofimages
     i
     k=0;
