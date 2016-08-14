@@ -17,14 +17,12 @@ image_write_dir='/home/vinayb/icra_17/data/mot_15/mot15/train/Venice-2/img1_chec
 sj=1;
 sk=1;
 
-% load detections_Pets.
-%load /home/vinayb/icra_17/data/MOT_Benchmarking_Datasets/MOT16/train/MOT16-13/MOT16-13-withoverlap.mat
-load /home/vinayb/icra_17/data/mot_15/mot15/train/Venice-2/detections_with_overlap_Venice-2.mat
-% load groundtruth_mot16.mat
+load /home/vinayb/icra_17/data/mot_15/mot15/train/Venice-2/detections_with_overlap_Venice-2.mat % Detections 
+
 tracklets=tracklets_new_overlap;
 delt=1;
 
-for i=1:(length(tracklets)-20)
+for i=1:length(tracklets)
     
  %   read images 
     image_1=imread(sprintf(image_dir,i));
@@ -72,7 +70,7 @@ visiblePoints_frame2_backward=round(visiblePoints_frame2_backward);
             
            if(tracklets{1,i}{1,j}(1,11)==tracklets{1,i+delt}{1,k}(1,11))   % Correct Matches 
                
-               if(tracklets{1,i}{1,j}(1,3)< 1900&& tracklets{1,i}{1,j}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)<1900 && tracklets{1,i+delt}{1,k}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)>20 && tracklets{1,i}{1,j}(1,3)>20 && tracklets{1,i}{1,j}(1,5)>20 && tracklets{1,i+delt}{1,k}(1,5)>20 && tracklets{1,i}{1,j}(1,4)>20 && tracklets{1,i+delt}{1,k}(1,4)>20)
+          %     if(tracklets{1,i}{1,j}(1,3)< 1900&& tracklets{1,i}{1,j}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)<1900 && tracklets{1,i+delt}{1,k}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)>20 && tracklets{1,i}{1,j}(1,3)>20 && tracklets{1,i}{1,j}(1,5)>20 && tracklets{1,i+delt}{1,k}(1,5)>20 && tracklets{1,i}{1,j}(1,4)>20 && tracklets{1,i+delt}{1,k}(1,4)>20)
                
                bbox1=[tracklets{1,i}{1,j}(1,3),tracklets{1,i}{1,j}(1,3)+tracklets{1,i}{1,j}(1,5),tracklets{1,i}{1,j}(1,4),tracklets{1,i}{1,j}(1,4)+tracklets{1,i}{1,j}(1,6)];
                
@@ -100,17 +98,17 @@ visiblePoints_frame2_backward=round(visiblePoints_frame2_backward);
                %correct_matches(sj,8)=flow_score_main;
                %correct_matches(sj,9)=flow_score_forward_backward_consistency;
                sj=sj+1;
-               filename_save=sprintf(image_write_dir,sj);
+         %      filename_save=sprintf(image_write_dir,sj);
                
 %               figure(1)
 %               subplot(2,2,1),imshow(image_1(tracklets{1,i}{1,j}(1,4):tracklets{1,i}{1,j}(1,4)+tracklets{1,i}{1,j}(1,6),tracklets{1,i}{1,j}(1,3):tracklets{1,i}{1,j}(1,3)+tracklets{1,i}{1,j}(1,5),:));
 %               subplot(2,2,2),imshow(image_2(tracklets{1,i+delt}{1,k}(1,4):tracklets{1,i+delt}{1,k}(1,4)+tracklets{1,i+delt}{1,k}(1,6),tracklets{1,i+delt}{1,k}(1,3):tracklets{1,i+delt}{1,k}(1,3)+tracklets{1,i+delt}{1,k}(1,5),:));
-               end 
+        %       end 
 %             saveas(gcf,filename_save)
                
            else    % Wrong Matches 
             
-            if(tracklets{1,i}{1,j}(1,3)<1900 && tracklets{1,i}{1,j}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)<1920 && tracklets{1,i+delt}{1,k}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)>20 && tracklets{1,i}{1,j}(1,3)>20 && tracklets{1,i+delt}{1,k}(1,3)>20 && tracklets{1,i+delt}{1,k}(1,5)>20 && tracklets{1,i+delt}{1,k}(1,5)>20 && tracklets{1,i}{1,j}(1,4)>20 && tracklets{1,i+delt}{1,k}(1,4)>20)
+          %  if(tracklets{1,i}{1,j}(1,3)<1900 && tracklets{1,i}{1,j}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)<1920 && tracklets{1,i+delt}{1,k}(1,4)<1060 && tracklets{1,i+delt}{1,k}(1,3)>20 && tracklets{1,i}{1,j}(1,3)>20 && tracklets{1,i+delt}{1,k}(1,3)>20 && tracklets{1,i+delt}{1,k}(1,5)>20 && tracklets{1,i+delt}{1,k}(1,5)>20 && tracklets{1,i}{1,j}(1,4)>20 && tracklets{1,i+delt}{1,k}(1,4)>20)
                 bbox1=[tracklets{1,i}{1,j}(1,3),tracklets{1,i}{1,j}(1,3)+tracklets{1,i}{1,j}(1,5),tracklets{1,i}{1,j}(1,4),tracklets{1,i}{1,j}(1,4)+tracklets{1,i}{1,j}(1,6)];
                
                 bbox2=[tracklets{1,i+delt}{1,k}(1,3),tracklets{1,i+delt}{1,k}(1,3)+tracklets{1,i+delt}{1,k}(1,5),tracklets{1,i+delt}{1,k}(1,4),tracklets{1,i+delt}{1,k}(1,4)+tracklets{1,i+delt}{1,k}(1,6)];
@@ -138,7 +136,7 @@ visiblePoints_frame2_backward=round(visiblePoints_frame2_backward);
                
                sk=sk+1;
         
-            end 
+ %           end 
            end 
         
         
